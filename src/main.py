@@ -21,17 +21,8 @@ def main():
     engine = RenderEngine()
     image = engine.render(scene.scene)
 
-    file_path = "renders/" + scene.scene_name + ".ppm"
-    image.save(file_path)
-    # show(file_path)
-
-
-def show(image_path):
-    import cv2
-    img = cv2.imread(image_path)
-    cv2.imshow('img', img)
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
+    image.save_as_ppm("renders/" + scene.scene_name + ".ppm")
+    image.save_as_png("renders/" + scene.scene_name + ".png")
 
 
 if __name__ == "__main__":

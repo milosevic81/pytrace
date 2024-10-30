@@ -23,3 +23,7 @@ pip install -r src/requirements.txt
 ```
 pip install -r test/requirements.txt
 ```
+
+# Render scene
+
+python .\src\main.py scene1
