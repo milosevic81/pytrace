@@ -26,4 +26,4 @@ pip install -r test/requirements.txt
 
 # Render scene
 
-python .\src\main.py scene1
+python .\src\main.py examples/scene1.yaml

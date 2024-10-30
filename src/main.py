@@ -3,7 +3,7 @@ import importlib
 from engine import RenderEngine
 import argparse
 from multiprocessing import cpu_count
-
+from scene_parser import load_scene
 
 def main():
     parser = argparse.ArgumentParser()
@@ -16,12 +16,13 @@ def main():
     else:
         process_count = args.processes
     # print("process_count", process_count)
-    scene = importlib.import_module("examples." + args.scene)
+    # scene = importlib.import_module("examples." + args.scene)
+    scene = load_scene(args.scene)
 
     engine = RenderEngine()
-    image = engine.render(scene.scene)
+    image = engine.render(scene)
 
-    image.save_as_ppm("renders/" + scene.scene_name + ".ppm")
+    # image.save_as_ppm("renders/" + scene.scene_name + ".ppm")
     image.save_as_png("renders/" + scene.scene_name + ".png")
 
 

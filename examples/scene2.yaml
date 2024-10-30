@@ -1,0 +1,19 @@
+# Replace entire file with:
+
+width: 320
+height: 240
+camera: [0, 0, -1]
+objects:
+  - type: sphere
+    center: [0, 0, 0]
+    radius: 0.5
+    material:
+      type: solid
+      color: "#0000FF"  # BLUE
+      ambient: 0.05
+      diffuse: 1.0
+      specular: 0.7
+lights:
+  - position: [1.5, -10.5, -10.0]
+    color: "#FFFFFF"  # WHITE
+name: "s2-blue-ball"

@@ -1,0 +1,29 @@
+width: 1920
+height: 1080
+camera: [0, -0.35, -1]
+objects:
+  - type: sphere
+    center: [0, 10000.5, 1]
+    radius: 10000
+    material:
+      type: checker
+      color1: "#0b2d39"
+      color2: "#bee0ec"
+  - type: sphere
+    center: [0.75, -0.1, 1]
+    radius: 0.6
+    material:
+      type: solid
+      color: "#0000FF"  # BLUE
+  - type: sphere
+    center: [-0.75, -0.1, 2.25]
+    radius: 0.6
+    material:
+      type: solid
+      color: "#FF0000"  # RED
+lights:
+  - position: [1.5, -0.5, -10.0]
+    color: "#FFFFFF"  # WHITE
+  - position: [-0.5, -10.5, 0]
+    color: "#E6E6E6"
+name: "s4-two-ball"
