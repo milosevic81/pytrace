@@ -80,7 +80,7 @@ impl RenderEngine {
         color
     }
 
-    fn find_nearest(&self, ray: &Ray, scene: &Scene) -> Option<(f64, &Sphere)> {
+    fn find_nearest<'a>(&self, ray: &Ray, scene: &'a Scene) -> Option<(f64, &'a Sphere)> {
         let mut nearest: Option<(f64, &Sphere)> = None;
 
         for object in &scene.objects {

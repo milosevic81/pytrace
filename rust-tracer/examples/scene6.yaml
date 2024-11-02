@@ -1,0 +1,67 @@
+width: 1920
+height: 1080
+camera: [0, 0, -2]
+objects:
+  # Starry background sphere
+  - type: sphere
+    center: [0, 0, 1000]
+    radius: 995
+    material:
+      type: checker
+      color1: "#000020"  # Very dark blue
+      color2: "#000030"  # Slightly lighter dark blue
+
+  # Sun (central glowing sphere)
+  - type: sphere
+    center: [0, 0, 3]
+    radius: 1.2
+    material:
+      type: solid
+      color: "#FFA500"  # Orange-yellow
+
+  # Mercury-like planet
+  - type: sphere
+    center: [-2, -0.5, 4]
+    radius: 0.3
+    material:
+      type: solid
+      color: "#808080"  # Grey
+
+  # Venus-like planet
+  - type: sphere
+    center: [1.5, 1, 5]
+    radius: 0.5
+    material:
+      type: checker
+      color1: "#CD853F"  # Peru
+      color2: "#8B4513"  # Saddle Brown
+
+  # Earth-like planet
+  - type: sphere
+    center: [-1.5, 1.5, 3.5]
+    radius: 0.4
+    material:
+      type: checker
+      color1: "#0000FF"  # Blue
+      color2: "#228B22"  # Forest Green
+
+  # Mars-like planet
+  - type: sphere
+    center: [2, -1, 4.5]
+    radius: 0.35
+    material:
+      type: solid
+      color: "#B22222"  # Fire Brick Red
+
+lights:
+  # Main light (sun glow)
+  - position: [0, 0, 2]
+    color: "#FFFFFF"
+  # Ambient space light
+  - position: [-5, 5, -5]
+    color: "#333333"
+  # Additional highlight
+  - position: [5, -5, -3]
+    color: "#666666"
+
+name: "solar-system-scene" 

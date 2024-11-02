@@ -1,0 +1,82 @@
+width: 1920
+height: 1080
+camera: [0, 0, -2]
+objects:
+  # Ocean background
+  - type: sphere
+    center: [0, 0, 1000]
+    radius: 995
+    material:
+      type: checker
+      color1: "#00425A"  # Deep ocean blue
+      color2: "#005780"  # Lighter ocean blue
+
+  # Large coral formation
+  - type: sphere
+    center: [-1, -0.5, 3]
+    radius: 0.8
+    material:
+      type: solid
+      color: "#FF6B6B"  # Coral pink
+
+  # Smaller coral branches
+  - type: sphere
+    center: [-0.7, 0.2, 2.8]
+    radius: 0.3
+    material:
+      type: solid
+      color: "#FF9999"  # Light coral
+
+  # Pearl
+  - type: sphere
+    center: [0.5, -0.3, 2.5]
+    radius: 0.25
+    material:
+      type: solid
+      color: "#F5F5F5"  # Pearl white
+
+  # Seaweed base (darker green sphere)
+  - type: sphere
+    center: [1.2, -0.8, 3]
+    radius: 0.4
+    material:
+      type: checker
+      color1: "#2E8B57"  # Sea green
+      color2: "#3CB371"  # Medium sea green
+
+  # Bubble cluster
+  - type: sphere
+    center: [-0.2, 0.8, 2.2]
+    radius: 0.15
+    material:
+      type: solid
+      color: "#E0FFFF"  # Light cyan
+
+  - type: sphere
+    center: [0.1, 1, 2.4]
+    radius: 0.12
+    material:
+      type: solid
+      color: "#E0FFFF"  # Light cyan
+
+  # Sea anemone
+  - type: sphere
+    center: [1.5, 0.5, 3.5]
+    radius: 0.35
+    material:
+      type: checker
+      color1: "#FF69B4"  # Hot pink
+      color2: "#FF1493"  # Deep pink
+
+lights:
+  # Main underwater light from above
+  - position: [0, 5, -3]
+    color: "#80FFFFFF"  # Soft white light
+  # Ambient ocean light
+  - position: [-3, 2, -2]
+    color: "#40A5D6"  # Bluish light
+  # Accent light
+  - position: [4, -2, -1]
+    color: "#408090"  # Deep blue light
+
+name: "underwater-scene" 

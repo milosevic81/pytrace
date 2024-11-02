@@ -1,0 +1,17 @@
+width: 320
+height: 240
+camera: [0, 0, -1]
+objects:
+  - type: sphere
+    center: [0, 0, 0]
+    radius: 0.5
+    material:
+      type: solid
+      color: "#FF0000"  # RED
+      ambient: 0.05
+      diffuse: 1.0
+      specular: 0.7
+lights:
+  - position: [5.5, -20.5, -10.0]
+    color: "#FFFFFF"  # WHITE
+name: "s1-red-ball" 

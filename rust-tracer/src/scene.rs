@@ -1,8 +1,8 @@
-use serde::{Serialize, Deserialize};
+// use serde::{Serialize, Deserialize};
 use std::fs;
 use crate::{Point, Light, Sphere};
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
+#[derive(Debug, Clone)]
 pub struct Scene {
     pub camera: Point,
     pub objects: Vec<Sphere>,
@@ -31,15 +31,15 @@ impl Scene {
         }
     }
 
-    pub fn from_yaml(path: &str) -> Result<Self, Box<dyn std::error::Error>> {
-        let contents = fs::read_to_string(path)?;
-        let scene: Scene = serde_yaml::from_str(&contents)?;
-        Ok(scene)
-    }
+    // pub fn from_yaml(path: &str) -> Result<Self, Box<dyn std::error::Error>> {
+    //     let contents = fs::read_to_string(path)?;
+    //     let scene: Scene = serde_yaml::from_str(&contents)?;
+    //     Ok(scene)
+    // }
 
-    pub fn save_yaml(&self, path: &str) -> Result<(), Box<dyn std::error::Error>> {
-        let yaml = serde_yaml::to_string(&self)?;
-        fs::write(path, yaml)?;
-        Ok(())
-    }
+    // pub fn save_yaml(&self, path: &str) -> Result<(), Box<dyn std::error::Error>> {
+    //     let yaml = serde_yaml::to_string(&self)?;
+    //     fs::write(path, yaml)?;
+    //     Ok(())
+    // }
 } 
