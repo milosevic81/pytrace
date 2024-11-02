@@ -28,3 +28,22 @@ cargo test
 ```
 cargo run -- examples/scene1.yaml
 ```
+
+
+# Benchamrk
+
+### Python
+
+> python .\src\main.py examples/scene4.yaml
+```
+Function=render, Time=61.89826536178589
+```
+
+### Rust
+
+> cargo run .\examples\scene4.yaml
+```
+Rendering: 99.9%
+Rendering completed in 1.55s
+Image saved to renders/s4-two-ball.png
+```

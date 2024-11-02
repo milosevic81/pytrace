@@ -1,6 +1,6 @@
 use serde::Deserialize;
 use std::fs;
-use crate::{Color, Material, CheckerMaterial, Point, Scene, Sphere, Light, Vector3};
+use crate::{Color, Material, material::MaterialType, Point, Scene, Sphere, Light, Vector3};
 
 #[derive(Debug, Deserialize)]
 struct SceneData {
@@ -84,6 +84,8 @@ fn parse_material(data: &MaterialData) -> Result<Material, Box<dyn std::error::E
             let color = parse_color(data.color.as_ref().ok_or("Color is required for solid material")?)?;
             Ok(Material::new(
                 color,
+                color,
+                MaterialType::Simple,
                 data.ambient,
                 data.diffuse,
                 data.specular,
@@ -95,6 +97,8 @@ fn parse_material(data: &MaterialData) -> Result<Material, Box<dyn std::error::E
             let color2 = parse_color(data.color2.as_ref().ok_or("color2 is required for checker material")?)?;
             Ok(Material::new(
                 color1, // We'll need to modify the Material struct to handle checker pattern
+                color2,
+                MaterialType::Checker,
                 data.ambient,
                 data.diffuse,
                 data.specular,

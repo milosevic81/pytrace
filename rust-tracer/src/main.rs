@@ -1,7 +1,6 @@
 mod color;
 mod ray;
 mod material;
-mod checker_material;
 mod sphere;
 mod light;
 mod scene;
@@ -16,7 +15,6 @@ use std::path::Path;
 pub use color::Color;
 pub use ray::Ray;
 pub use material::Material;
-pub use checker_material::CheckerMaterial;
 pub use sphere::Sphere;
 pub use light::Light;
 pub use scene::Scene;
