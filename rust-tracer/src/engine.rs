@@ -1,4 +1,6 @@
 use std::time::Instant;
+use rayon::prelude::*;
+use std::sync::Mutex;
 use crate::{Color, Image, Point, Ray, Scene, Vector3, Sphere};
 
 pub struct RenderEngine {
@@ -32,26 +34,48 @@ impl RenderEngine {
         );
 
         let mut image = Image::new(width, height);
-
-        for iy in 0..height {
-            let y = y0 + iy as f64 * dy;
-            for ix in 0..width {
-                let x = x0 + ix as f64 * dx;
-                let ray = Ray::new(
-                    scene.camera,
-                    Point::new(x, y, 0.0) - scene.camera
-                );
-                let color = self.ray_trace(&ray, scene, 0);
-                image.set_pixel(ix, iy, color);
-            }
-            // Progress indicator
-            print!("\rRendering: {:.1}%", (iy as f64 / height as f64) * 100.0);
-        }
-
-        let duration = start_time.elapsed();
-        println!("\nRendering completed in {:.2?}", duration);
         
-        image
+        let run_parallel = true;
+        if run_parallel {
+
+            let mimage = Mutex::new(image);
+
+            (0..height).into_par_iter().for_each(|iy| {
+                let y = y0 + iy as f64 * dy;
+                for ix in 0..width {
+                    let x = x0 + ix as f64 * dx;
+                    let ray = Ray::new(
+                        scene.camera,
+                        Point::new(x, y, 0.0) - scene.camera
+                    );
+                    let color = self.ray_trace(&ray, scene, 0);
+                    mimage.lock().unwrap().set_pixel(ix, iy, color);
+                }
+                // Progress indicator
+                print!("\rRendering: {:.1}%", (iy as f64 / height as f64) * 100.0);
+            });
+
+            return Mutex::into_inner(mimage).unwrap();
+
+        } else {
+
+            for iy in 0..height {
+                let y = y0 + iy as f64 * dy;
+                for ix in 0..width {
+                    let x = x0 + ix as f64 * dx;
+                    let ray = Ray::new(
+                        scene.camera,
+                        Point::new(x, y, 0.0) - scene.camera
+                    );
+                    let color = self.ray_trace(&ray, scene, 0);
+                    image.set_pixel(ix, iy, color);
+                }
+                // Progress indicator
+                print!("\rRendering: {:.1}%", (iy as f64 / height as f64) * 100.0);
+            }
+
+            return image
+        }
     }
 
     fn ray_trace(&self, ray: &Ray, scene: &Scene, depth: i32) -> Color {

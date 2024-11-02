@@ -47,3 +47,15 @@ Rendering: 99.9%
 Rendering completed in 1.55s
 Image saved to renders/s4-two-ball.png
 ```
+
+Scene 5 
+```
+Python:
+TotalMilliseconds : 168074.935
+
+Single thread:
+TotalMilliseconds : 6691.2546
+
+Multi thread:
+TotalMilliseconds : 3830.298
+```
