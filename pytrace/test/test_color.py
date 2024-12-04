@@ -8,5 +8,5 @@ from color import Color
     ("#FFFFFF", Color(1, 1, 1)),
     ("#000000", Color(0, 0, 0))
 ])
-def test_fom_hex(value, expected):
+def test_from_hex(value, expected):
     assert Color.from_hex(value) == expected
