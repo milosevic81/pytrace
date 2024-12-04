@@ -25,7 +25,7 @@ jobs:
             pip install -r src/requirements.txt
             pip install -r test/requirements.txt            
             pytest \
-                --junitxml=pytest.xml \
+                --junitxml=pytest.xml -o junit_family=legacy \
                 --cov-report=xml \
                 --cov=src
                 
