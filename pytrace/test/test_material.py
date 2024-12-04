@@ -14,6 +14,5 @@ def test_color_at(value, expected):
         ambient=0.05,
         diffuse=1.0,
         specular=1.0,
-        reflection=0.5):
-    )    
+        reflection=0.5)
     assert material.color_at(value) == expected
