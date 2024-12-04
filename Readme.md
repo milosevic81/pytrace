@@ -1,3 +1,5 @@
+[![codecov](https://codecov.io/github/milosevic81/pytrace/branch/main/graph/badge.svg?token=TRUR4TMMYT)](https://codecov.io/github/milosevic81/pytrace)
+
 ### Rust Setup
 
 #### Install Rust
