@@ -2,6 +2,7 @@ import pytest
 
 from material import Material
 from point import Point
+from color import Color
 
 
 @pytest.mark.parametrize("value,expected", [
