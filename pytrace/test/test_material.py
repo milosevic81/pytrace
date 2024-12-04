@@ -6,7 +6,7 @@ from color import Color
 
 
 @pytest.mark.parametrize("value,expected", [
-    (Point(0,0,0), Color.WHITE),
+    (Point(0,0,0), Color.BLACK),
 ])
 def test_color_at(value, expected):
     material = CheckerMaterial(
