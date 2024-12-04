@@ -9,9 +9,12 @@ on:
 
 jobs:
 
-  run-pytest:
+  test-pytrace:
 
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: pytrace
     steps:
         - uses: actions/checkout@v4
         - uses: actions/setup-python@v5
@@ -19,7 +22,6 @@ jobs:
             python-version: '3.10'
         - name: Run tests and code coverage
           run: |
-            cd pytrace
             python3 -m venv venv
             source venv/bin/activate
             pip install -r src/requirements.txt
@@ -39,3 +41,36 @@ jobs:
           uses: codecov/test-results-action@v1
           with:
             token: ${{ secrets.CODECOV_TOKEN }}
+
+  test-rust-tracer:
+
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: rust-tracer
+    steps:
+        - uses: actions/checkout@v4
+       
+        - name: Install latest nightly
+          uses: actions-rs/toolchain@v1
+          with:
+              toolchain: nightly
+              override: true
+              components: rustfmt, clippy
+
+        - name: Build
+          run: cargo build --verbose
+
+        - name: Run tests
+          run: cargo test --verbose
+                
+        # - name: Upload coverage reports to Codecov
+        #   uses: codecov/codecov-action@v5
+        #   with:
+        #     token: ${{ secrets.CODECOV_TOKEN }}
+
+        # - name: Upload test results to Codecov
+        #   if: ${{ !cancelled() }}
+        #   uses: codecov/test-results-action@v1
+        #   with:
+        #     token: ${{ secrets.CODECOV_TOKEN }}
