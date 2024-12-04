@@ -54,23 +54,44 @@ jobs:
         - name: Install latest nightly
           uses: actions-rs/toolchain@v1
           with:
-              toolchain: nightly
+              toolchain: stable
               override: true
-              components: rustfmt, clippy
 
-        - name: Build
-          run: cargo build --verbose
+        - name: Cache Cargo registry
+          uses: actions/cache@v3
+          with:
+            path: |
+              ~/.cargo/registry
+              ~/.cargo/bin
+            key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+            restore-keys: |
+              ${{ runner.os }}-cargo-
 
-        - name: Run tests
-          run: cargo test --verbose
+        - name: Install dependencies
+          run: cargo fetch
+
+        - name: Install cargo-nextest and cargo-tarpaulin
+          run: |
+            cargo install cargo-nextest
+            cargo install cargo-tarpaulin
+
+        - name: Run tests and generate test report
+          run: |
+            cargo nextest run --output-format junit > test-results.xml
+
+        - name: Run tests with coverage
+          run: |
+            cargo tarpaulin --out Xml --output coverage.xml
                 
-        # - name: Upload coverage reports to Codecov
-        #   uses: codecov/codecov-action@v5
-        #   with:
-        #     token: ${{ secrets.CODECOV_TOKEN }}
+        - name: Upload coverage to Codecov
+          uses: codecov/codecov-action@v5
+          with:
+            files: coverage.xml
+            token: ${{ secrets.CODECOV_TOKEN }}
 
-        # - name: Upload test results to Codecov
-        #   if: ${{ !cancelled() }}
-        #   uses: codecov/test-results-action@v1
-        #   with:
-        #     token: ${{ secrets.CODECOV_TOKEN }}
+        - name: Upload test results to Codecov
+          if: ${{ !cancelled() }}
+          uses: codecov/test-results-action@v1
+          with:
+            files: test-results.xml
+            token: ${{ secrets.CODECOV_TOKEN }}
