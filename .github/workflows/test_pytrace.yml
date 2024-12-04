@@ -9,21 +9,37 @@ on:
 
 jobs:
 
-  run-pytest:
+  test-pytrace:
 
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: pytrace
     steps:
         - uses: actions/checkout@v4
+
         - uses: actions/setup-python@v5
           with:
             python-version: '3.10'
-        - name: Run tests and code coverage
+
+        - name: Cache Python dependencies
+          uses: actions/cache@v3
+          with:
+            path: ~/.cache/pip
+            key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements*.txt') }}
+            restore-keys: |
+              ${{ runner.os }}-pip-
+
+        - name: Install dependencies
           run: |
-            cd pytrace
             python3 -m venv venv
             source venv/bin/activate
             pip install -r src/requirements.txt
-            pip install -r test/requirements.txt            
+            pip install -r test/requirements.txt
+
+        - name: Run tests and code coverage
+          run: |
+            source venv/bin/activate
             pytest \
                 --junitxml=pytest.xml -o junit_family=legacy \
                 --cov-report=xml \
@@ -39,3 +55,42 @@ jobs:
           uses: codecov/test-results-action@v1
           with:
             token: ${{ secrets.CODECOV_TOKEN }}
+
+  test-rust-tracer:
+
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: rust-tracer
+    env:
+      CARGO_TERM_COLOR: always
+    steps:
+    - uses: actions/checkout@v4
+
+    - uses: actions-rs/toolchain@v1
+      with:
+        toolchain: nightly
+        override: true
+
+    - name: Build
+      run: cargo build --verbose
+
+    - name: Run tests
+      run: cargo test --verbose
+
+    # - uses: actions-rs/cargo@v1
+    #   with:
+    #     command: test
+    #     args: --all-features --no-fail-fast  # Customize args for your own needs
+    #   env:
+    #     CARGO_INCREMENTAL: '0'
+    #     RUSTFLAGS: '-Zprofile -Ccodegen-units=1 -Cinline-threshold=0 -Clink-dead-code -Coverflow-checks=off -Cpanic=abort -Zpanic_abort_tests'
+    #     RUSTDOCFLAGS: '-Zprofile -Ccodegen-units=1 -Cinline-threshold=0 -Clink-dead-code -Coverflow-checks=off -Cpanic=abort -Zpanic_abort_tests'
+
+    # - name: Codecov
+    #   uses: codecov/codecov-action@v4
+    #   env:
+    #     CODECOV_TOKEN: ${{ secrets.CODECOV_ORG_TOKEN }}
+    #   with:
+    #     verbose: true
+    #     fail_ci_if_error: true
