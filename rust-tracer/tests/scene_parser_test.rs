@@ -5,8 +5,8 @@ use rust_tracer::{
 };
 
 fn setup() -> String {
-    let test_path = "test_scene.yaml";
-    fs::write(test_path, include_str!("test_scene.yaml")).expect("Failed to write test file");
+    let test_path = "examples/scene1.yaml";
+    // fs::write(test_path, include_str!("examples/scene1.yam")).expect("Failed to write test file");
     test_path.to_string()
 }
 
