@@ -30,7 +30,7 @@ fn test_parse_vector() {
 fn test_parse_solid_material() {
     let material_data = serde_yaml::from_str(r#"
         type: solid
-        color: "#FF0000"
+        color: '#FF0000'
         ambient: 0.1
         diffuse: 0.8
         specular: 0.5
@@ -52,8 +52,8 @@ fn test_parse_solid_material() {
 fn test_parse_checker_material() {
     let material_data = serde_yaml::from_str(r#"
         type: checker
-        color1: "#FFFFFF"
-        color2: "#000000"
+        color1: '#FFFFFF'
+        color2: '#000000'
     "#).unwrap();
     
     let material = parse_material(&material_data).unwrap();
@@ -70,7 +70,7 @@ fn test_parse_checker_material() {
 fn test_parse_invalid_material() {
     let material_data = serde_yaml::from_str(r#"
         type: invalid
-        color: "#FF0000"
+        color: '#FF0000'
     "#).unwrap();
     
     assert!(parse_material(&material_data).is_err());
@@ -80,7 +80,7 @@ fn test_parse_invalid_material() {
 fn test_parse_lights() {
     let lights_data = serde_yaml::from_str(r#"
         - position: [2, 3, -4]
-          color: "#FFFFFF"
+          color: '#FFFFFF'
     "#).unwrap();
     
     let lights = parse_lights(&lights_data).unwrap();
