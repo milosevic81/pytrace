@@ -1,6 +1,6 @@
 import pytest
 
-from material import Material
+from material import Material, CheckerMaterial
 from point import Point
 from color import Color
 
