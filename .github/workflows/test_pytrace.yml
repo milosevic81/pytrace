@@ -91,7 +91,7 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y libgtest-dev cmake lcov libboost-all-dev
+        sudo apt-get install -y libgtest-dev cmake gcov libboost-all-dev
 
     - name: Build
       run: |        
@@ -108,13 +108,13 @@ jobs:
       run: |
         export OPTIONS=" --output-file coverage.info --ignore-errors range --ignore-errors unused"
         # Capture coverage data
-        lcov --directory build --capture --output-file coverage.info --ignore-errors range --ignore-errors unused
+        gcov --directory build --capture --output-file coverage.info --ignore-errors range --ignore-errors unused
         # Remove coverage for unwanted files
-        lcov --remove coverage.info '/usr/*' "${HOME}"'/.cache/*' --output-file coverage.info --ignore-errors range --ignore-errors unused
+        gcov --remove coverage.info '/usr/*' "${HOME}"'/.cache/*' --output-file coverage.info --ignore-errors range --ignore-errors unused
         # Filter coverage to include only 'src' directory
-        lcov --extract coverage.info '**/src/*' --output-file coverage.info --ignore-errors range --ignore-errors unused
+        gcov --extract coverage.info '**/src/*' --output-file coverage.info --ignore-errors range --ignore-errors unused
         # Display the coverage report
-        lcov --list coverage.info
+        gcov --list coverage.info
 
     - name: Upload coverage reports to Codecov
       uses: codecov/codecov-action@v5
