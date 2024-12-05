@@ -106,13 +106,13 @@ jobs:
 
     - name: Generate coverage report
       run: |
-        export OPTIONS=" --output-file coverage.info --ignore-errors inconsistent --ignore-errors range --ignore-errors unused"
+        export OPTIONS=" --output-file coverage.info --ignore-errors range --ignore-errors unused"
         # Capture coverage data
-        lcov --directory build --capture --output-file coverage.info --ignore-errors inconsistent --ignore-errors range --ignore-errors unused
+        lcov --directory build --capture --output-file coverage.info --ignore-errors range --ignore-errors unused
         # Remove coverage for unwanted files
-        lcov --remove coverage.info '/usr/*' "${HOME}"'/.cache/*' --output-file coverage.info --ignore-errors inconsistent --ignore-errors range --ignore-errors unused
+        lcov --remove coverage.info '/usr/*' "${HOME}"'/.cache/*' --output-file coverage.info --ignore-errors range --ignore-errors unused
         # Filter coverage to include only 'src' directory
-        lcov --extract coverage.info '**/src/*' --output-file coverage.info --ignore-errors inconsistent --ignore-errors range --ignore-errors unused
+        lcov --extract coverage.info '**/src/*' --output-file coverage.info --ignore-errors range --ignore-errors unused
         # Display the coverage report
         lcov --list coverage.info
 
