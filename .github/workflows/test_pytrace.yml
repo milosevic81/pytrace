@@ -91,9 +91,7 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y libgtest-dev
-        sudo apt-get install -y cmake
-        sudo apt-get install -y libboost-all-dev
+        sudo apt-get install -y libgtest-dev cmake lcov libboost-all-dev
 
     - name: Build
       run: |        
@@ -108,13 +106,13 @@ jobs:
 
     - name: Generate coverage report
       run: |
-        export OPTIONS=" --output-file coverage.info --ignore-errors inconsistent --ignore-errors range --ignore-errors unused"
+        export OPTIONS=" --output-file coverage.info"
         # Capture coverage data
-        lcov --directory build --capture --output-file coverage.info --ignore-errors inconsistent --ignore-errors range --ignore-errors unused
+        lcov --directory build --capture --output-file coverage.info
         # Remove coverage for unwanted files
-        lcov --remove coverage.info '/usr/*' "${HOME}"'/.cache/*' --output-file coverage.info --ignore-errors inconsistent --ignore-errors range --ignore-errors unused
+        lcov --remove coverage.info '/usr/*' "${HOME}"'/.cache/*' --output-file coverage.info
         # Filter coverage to include only 'src' directory
-        lcov --extract coverage.info '**/src/*' --output-file coverage.info --ignore-errors inconsistent --ignore-errors range --ignore-errors unused
+        lcov --extract coverage.info '**/src/*' --output-file coverage.info
         # Display the coverage report
         lcov --list coverage.info
 
