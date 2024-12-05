@@ -78,19 +78,35 @@ jobs:
     - name: Run tests
       run: cargo test --verbose
 
-    # - uses: actions-rs/cargo@v1
-    #   with:
-    #     command: test
-    #     args: --all-features --no-fail-fast  # Customize args for your own needs
-    #   env:
-    #     CARGO_INCREMENTAL: '0'
-    #     RUSTFLAGS: '-Zprofile -Ccodegen-units=1 -Cinline-threshold=0 -Clink-dead-code -Coverflow-checks=off -Cpanic=abort -Zpanic_abort_tests'
-    #     RUSTDOCFLAGS: '-Zprofile -Ccodegen-units=1 -Cinline-threshold=0 -Clink-dead-code -Coverflow-checks=off -Cpanic=abort -Zpanic_abort_tests'
 
-    # - name: Codecov
-    #   uses: codecov/codecov-action@v4
-    #   env:
-    #     CODECOV_TOKEN: ${{ secrets.CODECOV_ORG_TOKEN }}
-    #   with:
-    #     verbose: true
-    #     fail_ci_if_error: true
+  test-cpp-tracer:
+
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: cpp-trace
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y libgtest-dev
+        sudo apt-get install -y cmake
+        sudo apt-get install -y libboost-all-dev
+
+    - name: Build
+      run: |        
+        cmake -B build
+        cmake --build build
+
+    - name: Run tests
+      run: |
+        ctest --test-dir build --verbose
+
+    - name: Upload test results to Codecov
+      if: ${{ !cancelled() }}
+      uses: codecov/test-results-action@v1
+      with:
+        files: build/report.xml
+        token: ${{ secrets.CODECOV_TOKEN }}
