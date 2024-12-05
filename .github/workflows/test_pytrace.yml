@@ -106,13 +106,13 @@ jobs:
 
     - name: Generate coverage report
       run: |
-        export OPTIONS=" --output-file coverage.info --ignore-errors range --ignore-errors unused"
+        export OPTIONS=" --output-file coverage.info --ignore-errors unused"
         # Capture coverage data
-        gcov --directory build --capture --output-file coverage.info --ignore-errors range --ignore-errors unused
+        gcov --directory build --capture --output-file coverage.info --ignore-errors unused
         # Remove coverage for unwanted files
-        gcov --remove coverage.info '/usr/*' "${HOME}"'/.cache/*' --output-file coverage.info --ignore-errors range --ignore-errors unused
+        gcov --remove coverage.info '/usr/*' "${HOME}"'/.cache/*' --output-file coverage.info --ignore-errors unused
         # Filter coverage to include only 'src' directory
-        gcov --extract coverage.info '**/src/*' --output-file coverage.info --ignore-errors range --ignore-errors unused
+        gcov --extract coverage.info '**/src/*' --output-file coverage.info --ignore-errors unused
         # Display the coverage report
         gcov --list coverage.info
 
