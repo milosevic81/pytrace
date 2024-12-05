@@ -8,11 +8,23 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 # Enable code coverage flags
-if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
-    add_compile_options(--coverage)
-    add_link_options(--coverage)
-endif()
+# Code Coverage Configuration
+add_library(coverage_config INTERFACE)
 
+option(CODE_COVERAGE "Enable coverage reporting" OFF)
+if(CODE_COVERAGE AND CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
+  # Add required flags (GCC & LLVM/Clang)
+  target_compile_options(coverage_config INTERFACE
+    -O0        # no optimization
+    -g         # generate debug info
+    --coverage # sets all required flags
+  )
+  if(CMAKE_VERSION VERSION_GREATER_EQUAL 3.13)
+    target_link_options(coverage_config INTERFACE --coverage)
+  else()
+    target_link_libraries(coverage_config INTERFACE --coverage)
+  endif()
+endif(CODE_COVERAGE AND CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
 # Add the Vector3 library
 add_library(CppTracer src/vector.cpp)
 
@@ -28,8 +40,12 @@ FetchContent_MakeAvailable(googletest)
 # Add the test executable
 add_executable(CppTracerTests test/test_vector.cpp)
 
+# Include code-coverage settings:
+target_link_libraries(CppTracer PUBLIC coverage_config)
+# target_link_libraries(CppTracerTests PUBLIC coverage_config)
+
 # Link the test executable against Google Test and the Vector3 library
-target_link_libraries(CppTracerTests gtest_main CppTracer)
+target_link_libraries(CppTracerTests gtest_main CppTracer coverage_config)
 
 # Enable testing
 enable_testing()
