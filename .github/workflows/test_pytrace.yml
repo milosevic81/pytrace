@@ -91,7 +91,7 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y libgtest-dev cmake gcov libboost-all-dev
+        sudo apt-get install -y libgtest-dev cmake lcov libboost-all-dev
 
     - name: Build
       run: |        
