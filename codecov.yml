@@ -6,9 +6,9 @@ coverage:
         target: auto #default
         threshold: 5%
         base: auto 
-  include:
-    - pytrace/src/
-    - cpp-trace/src/
+  # include:
+  #   - pytrace/src/
+  #   - cpp-trace/src/
 
 
 comment:                  #this is a top-level key
