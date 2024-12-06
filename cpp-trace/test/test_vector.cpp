@@ -18,6 +18,13 @@ TEST(Vector3Test, Add) {
     EXPECT_EQ(Vector3(1, 1, 1) + Vector3(-1, -1, -1), Vector3(0, 0, 0));
 }
 
+TEST(Vector3Test, Sub) {
+    EXPECT_EQ(Vector3(0, 0, 0) - Vector3(0, 0, 0), Vector3(0, 0, 0));
+    EXPECT_EQ(Vector3(1, 0, 0) - Vector3(0, 0, 0), Vector3(1, 0, 0));
+    EXPECT_EQ(Vector3(1, 1, 1) - Vector3(1, 1, 1), Vector3(0, 0, 0));
+    EXPECT_EQ(Vector3(1, 1, 1) - Vector3(-1, -1, -1), Vector3(-2.0, -2.0, -2.0));
+}
+
 TEST(Vector3Test, Multiply) {
     EXPECT_EQ(Vector3(0, 0, 0) * 3, Vector3(0, 0, 0));
     EXPECT_EQ(Vector3(1, 0, 0) * 3, Vector3(3, 0, 0));
