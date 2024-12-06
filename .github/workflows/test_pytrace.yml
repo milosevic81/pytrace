@@ -115,6 +115,7 @@ jobs:
       uses: codecov/codecov-action@v5
       with:
         files: coverage.info
+        disable_search: true
         # gcov_include: '**/src/*'
         # gcov_args: "--extract coverage.info '**/src/*'"
         token: ${{ secrets.CODECOV_TOKEN }}
