@@ -80,7 +80,6 @@ jobs:
     - name: Run tests
       run: cargo test --verbose
 
-
   test-cpp-tracer:
 
     runs-on: ubuntu-latest
@@ -106,22 +105,19 @@ jobs:
       run: |
         ctest --test-dir build --verbose
 
-    - name: Generate coverage report
-      run: |
-        export OPTIONS=" --output-file coverage.info"
-        # Capture coverage data
-        lcov --directory build --capture --output-file coverage.info
-        # Remove coverage for unwanted files
-        lcov --remove coverage.info '/usr/*' "${HOME}"'/.cache/*' --output-file coverage.info
-        # Filter coverage to include only 'src' directory
-        lcov --extract coverage.info '**/src/*' --output-file coverage.info
-        # Display the coverage report
-        lcov --list coverage.info
+    # - name: Generate coverage report
+    #   run: |        
+    #     lcov --directory build --capture --output-file coverage.info
+    #     lcov --extract coverage.info '**/src/*' --output-file coverage.info
+    #     lcov --list coverage.info
 
     - name: Upload coverage reports to Codecov
       uses: codecov/codecov-action@v5
       with:
-        files: coverage.info
+        # files: cpp-trace/coverage.info
+        # disable_search: true
+        # gcov_include: '**/src/*'
+        # gcov_args: "--extract coverage.info '**/src/*'"
         token: ${{ secrets.CODECOV_TOKEN }}
 
     - name: Upload test results to Codecov

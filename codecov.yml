@@ -4,8 +4,12 @@ coverage:
       default:
         # basic
         target: auto #default
-        threshold: 0%
+        threshold: 5%
         base: auto 
+  include:
+    - pytrace/src/
+    - cpp-trace/src/
+
 
 comment:                  #this is a top-level key
   layout: " diff, flags, files"
