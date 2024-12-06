@@ -22,7 +22,7 @@ TEST(Vector3Test, Sub) {
     EXPECT_EQ(Vector3(0, 0, 0) - Vector3(0, 0, 0), Vector3(0, 0, 0));
     EXPECT_EQ(Vector3(1, 0, 0) - Vector3(0, 0, 0), Vector3(1, 0, 0));
     EXPECT_EQ(Vector3(1, 1, 1) - Vector3(1, 1, 1), Vector3(0, 0, 0));
-    EXPECT_EQ(Vector3(1, 1, 1) - Vector3(-1, -1, -1), Vector3(-2, -2, -2));
+    EXPECT_EQ(Vector3(1, 1, 1) - Vector3(-1, -1, -1), Vector3(-2.0, -2.0, -2.0));
 }
 
 TEST(Vector3Test, Multiply) {
