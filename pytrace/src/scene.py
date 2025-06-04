@@ -1,5 +1,6 @@
 import json
 
+
 class Scene:
     """Scene has all information needed to render"""
 
@@ -19,4 +20,4 @@ class Scene:
 
     def save(self, file_path):
         with open(file_path, "w") as f:
-            json.dump(self.__dict__, f, default=lambda o: o.__dict__ , indent=4)
+            json.dump(self.__dict__, f, default=lambda o: o.__dict__, indent=4)

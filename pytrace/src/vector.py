@@ -14,7 +14,7 @@ class Vector3:
         return self.__str__()
 
     def magnitude(self):
-        return math.sqrt(self.x ** 2 + self.y ** 2 + self.z ** 2)
+        return math.sqrt(self.x**2 + self.y**2 + self.z**2)
 
     def dot(self, other):
         return self.x * other.x + self.y * other.y + self.z * other.z

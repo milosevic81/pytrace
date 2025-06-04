@@ -52,7 +52,7 @@ fn default_specular() -> f64 { 0.7 }
 pub fn load_scene(yaml_file: &str) -> Result<Scene, Box<dyn std::error::Error>> {
     let contents = fs::read_to_string(yaml_file)?;
     let data: SceneData = serde_yaml::from_str(&contents)?;
-    
+
     let camera = parse_vector(&data.camera)?;
     let objects = parse_objects(&data.objects)?;
     let lights = parse_lights(&data.lights)?;
@@ -132,4 +132,4 @@ fn parse_lights(lights_data: &[LightData]) -> Result<Vec<Light>, Box<dyn std::er
         lights.push(Light::new(position, color));
     }
     Ok(lights)
-} 
+}

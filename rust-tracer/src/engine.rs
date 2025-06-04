@@ -22,7 +22,7 @@ impl RenderEngine {
 
     pub fn render(&self, scene: &Scene) -> Image {
         let start_time = Instant::now();
-        
+
         let width = scene.width;
         let height = scene.height;
         let aspect_ratio = width as f64 / height as f64;
@@ -34,7 +34,7 @@ impl RenderEngine {
         );
 
         let mut image = Image::new(width, height);
-        
+
         let run_parallel = true;
         if run_parallel {
 
@@ -80,7 +80,7 @@ impl RenderEngine {
 
     fn ray_trace(&self, ray: &Ray, scene: &Scene, depth: i32) -> Color {
         let mut color = Color::BLACK;
-        
+
         if let Some((distance, object)) = self.find_nearest(ray, scene) {
             if distance > self.max_distance {
                 return color;

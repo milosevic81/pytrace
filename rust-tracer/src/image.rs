@@ -27,8 +27,8 @@ impl Image {
             let x = (i as u32) % self.width;
             let y = (i as u32) / self.width;
             img.put_pixel(
-                x, 
-                y, 
+                x,
+                y,
                 Rgb([
                     (color.vector.x * 255.0) as u8,
                     (color.vector.y * 255.0) as u8,
@@ -40,4 +40,4 @@ impl Image {
         img.save(file_path)?;
         Ok(())
     }
-} 
+}

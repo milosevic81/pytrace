@@ -60,4 +60,4 @@ impl Mul for Color {
             self.vector.z * other.vector.z,
         )
     }
-} 
+}

@@ -32,9 +32,9 @@ impl Material {
             reflection,
         }
     }
-    
+
     pub fn color_at(&self, position: Point) -> Color {
-        if self.material_type == MaterialType::Checker {           
+        if self.material_type == MaterialType::Checker {
             if (((position.x + 5.0) * 3.0) as i32 % 2) == ((position.z * 3.0) as i32 % 2) {
                 return self.color1
             } else {
@@ -43,4 +43,4 @@ impl Material {
         }
         return self.color1
     }
-} 
+}

@@ -1,8 +1,12 @@
 import unittest
 from scene_parser import (
-    parse_color, parse_point, parse_vector, 
-    parse_material, parse_sphere, parse_light,
-    parse_objects, load_scene
+    parse_color,
+    parse_point,
+    parse_vector,
+    parse_material,
+    parse_sphere,
+    parse_light,
+    load_scene,
 )
 from color import Color
 from point import Point
@@ -12,6 +16,7 @@ from sphere import Sphere
 from light import Light
 from scene import Scene
 import os
+
 
 class TestSceneParser(unittest.TestCase):
     def setUp(self):
@@ -66,13 +71,7 @@ objects:
         self.assertEqual(vector, Vector3(1, 2, 3))
 
     def test_parse_solid_material(self):
-        material_data = {
-            "type": "solid",
-            "color": "#FF0000",
-            "ambient": 0.1,
-            "diffuse": 0.8,
-            "specular": 0.5
-        }
+        material_data = {"type": "solid", "color": "#FF0000", "ambient": 0.1, "diffuse": 0.8, "specular": 0.5}
         material = parse_material(material_data)
         self.assertIsInstance(material, Material)
         self.assertEqual(material.color, Color(1.0, 0.0, 0.0))
@@ -81,43 +80,26 @@ objects:
         self.assertEqual(material.specular, 0.5)
 
     def test_parse_checker_material(self):
-        material_data = {
-            "type": "checker",
-            "color1": "#FFFFFF",
-            "color2": "#000000"
-        }
+        material_data = {"type": "checker", "color1": "#FFFFFF", "color2": "#000000"}
         material = parse_material(material_data)
         self.assertIsInstance(material, CheckerMaterial)
         self.assertEqual(material.color1, Color(1.0, 1.0, 1.0))
         self.assertEqual(material.color2, Color(0.0, 0.0, 0.0))
 
     def test_parse_invalid_material(self):
-        material_data = {
-            "type": "invalid",
-            "color": "#FF0000"
-        }
+        material_data = {"type": "invalid", "color": "#FF0000"}
         with self.assertRaises(ValueError):
             parse_material(material_data)
 
     def test_parse_sphere(self):
-        sphere_data = {
-            "center": [0, 0, 0],
-            "radius": 1,
-            "material": {
-                "type": "solid",
-                "color": "#FF0000"
-            }
-        }
+        sphere_data = {"center": [0, 0, 0], "radius": 1, "material": {"type": "solid", "color": "#FF0000"}}
         sphere = parse_sphere(sphere_data)
         self.assertIsInstance(sphere, Sphere)
         self.assertEqual(sphere.center, Point(0, 0, 0))
         self.assertEqual(sphere.radius, 1)
 
     def test_parse_light(self):
-        light_data = {
-            "position": [2, 3, -4],
-            "color": "#FFFFFF"
-        }
+        light_data = {"position": [2, 3, -4], "color": "#FFFFFF"}
         light = parse_light(light_data)
         self.assertIsInstance(light, Light)
         self.assertEqual(light.position, Point(2, 3, -4))
@@ -133,5 +115,6 @@ objects:
         self.assertEqual(len(scene.lights), 1)
         self.assertEqual(scene.scene_name, "test_scene")
 
-if __name__ == '__main__':
-    unittest.main() 
+
+if __name__ == "__main__":
+    unittest.main()

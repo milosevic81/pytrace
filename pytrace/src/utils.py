@@ -1,8 +1,9 @@
 import time
 
+
 def st_time(func):
     """
-        st decorator to calculate the total time of a func
+    st decorator to calculate the total time of a func
     """
 
     def st_func(*args, **keyArgs):

@@ -6,9 +6,11 @@ class Color(Vector3):
 
     @classmethod
     def from_hex(cls, param: str):
-        return cls(int(param[1:3], 16) / Color.COLOR_MAX,
-                   int(param[3:5], 16) / Color.COLOR_MAX,
-                   int(param[5:7], 16) / Color.COLOR_MAX)
+        return cls(
+            int(param[1:3], 16) / Color.COLOR_MAX,
+            int(param[3:5], 16) / Color.COLOR_MAX,
+            int(param[5:7], 16) / Color.COLOR_MAX,
+        )
 
 
 Color.WHITE = Color(1, 1, 1)

@@ -20,4 +20,4 @@ impl Light {
             color: Color::WHITE,
         }
     }
-} 
+}

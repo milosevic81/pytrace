@@ -35,4 +35,4 @@ impl Sphere {
     pub fn normal(&self, surface_point: Point) -> Vector3 {
         (surface_point - self.center).normalize()
     }
-} 
+}

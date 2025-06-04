@@ -64,4 +64,4 @@ lights:
   - position: [5, -5, -3]
     color: "#666666"
 
-name: "solar-system-scene" 
+name: "solar-system-scene"

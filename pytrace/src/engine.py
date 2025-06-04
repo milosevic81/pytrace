@@ -10,6 +10,7 @@ from vector import Vector3
 
 class RenderEngine:
     """Renders 3D object into 2D using raytracing"""
+
     MAX_DEPTH = 5
     MAX_DISTANCE = 10.0
     MIN_DISPLACE = 0.0001
@@ -38,7 +39,7 @@ class RenderEngine:
             print(f"{iy/height:3.1%}", end="\r")
         return pixels
 
-    def ray_trace(self, ray: Ray, scene: Scene, depth:int = 0) -> Color:
+    def ray_trace(self, ray: Ray, scene: Scene, depth: int = 0) -> Color:
         """Cast ray and calculate color"""
         color = Color.BLACK
         distance_hit, object_hit = self.find_nearest(ray, scene)
@@ -52,9 +53,9 @@ class RenderEngine:
         if depth < self.MAX_DEPTH:
             new_ray = Ray(
                 hit_position + hit_normal * self.MIN_DISPLACE,
-                ray.direction - 2 * ray.direction.dot(hit_normal) * hit_normal
+                ray.direction - 2 * ray.direction.dot(hit_normal) * hit_normal,
             )
-            color += self.ray_trace(new_ray, scene, depth+1) * object_hit.material.reflection
+            color += self.ray_trace(new_ray, scene, depth + 1) * object_hit.material.reflection
 
         return color
 
