@@ -14,4 +14,4 @@ impl Ray {
             direction: direction.normalize(),
         }
     }
-} 
+}

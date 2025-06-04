@@ -84,4 +84,4 @@ impl Div<f64> for Vector3 {
 }
 
 // Point is just an alias for Vector3
-pub type Point = Vector3; 
+pub type Point = Vector3;

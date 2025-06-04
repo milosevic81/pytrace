@@ -5,7 +5,7 @@ coverage:
         # basic
         target: auto #default
         threshold: 5%
-        base: auto 
+        base: auto
   # include:
   #   - pytrace/src/
   #   - cpp-trace/src/

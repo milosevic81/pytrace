@@ -79,4 +79,4 @@ lights:
   - position: [4, -2, -1]
     color: "#408090"  # Deep blue light
 
-name: "underwater-scene" 
+name: "underwater-scene"

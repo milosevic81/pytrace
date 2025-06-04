@@ -9,6 +9,10 @@ on:
 
 jobs:
 
+  pre-commit:
+    uses: ./.github/workflows/pre-commit.yml
+    secrets: inherit
+
   test-pytrace:
 
     runs-on: ubuntu-latest
@@ -44,7 +48,7 @@ jobs:
                 --junitxml=pytest.xml -o junit_family=legacy \
                 --cov-report xml:cov.xml \
                 --cov=src
-                
+
         - name: Upload coverage reports to Codecov
           uses: codecov/codecov-action@v5
           with:
@@ -95,10 +99,10 @@ jobs:
         sudo apt-get install -y libgtest-dev cmake lcov libboost-all-dev
 
     - name: Build
-      run: |        
+      run: |
         # cmake -B build
         cmake -DCODE_COVERAGE=ON -DCMAKE_BUILD_TYPE=Debug -B build
-        cmake --build build --config Debug 
+        cmake --build build --config Debug
 
 
     - name: Run tests
@@ -106,7 +110,7 @@ jobs:
         ctest --test-dir build --verbose
 
     - name: Generate coverage report
-      run: |        
+      run: |
         lcov --directory build --capture --output-file coverage.info
         lcov --extract coverage.info '**/src/*' --output-file coverage.info
         lcov --list coverage.info

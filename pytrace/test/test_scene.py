@@ -1,5 +1,3 @@
-import json
-
 from color import Color
 from light import Light
 from material import Material

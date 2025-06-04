@@ -1,6 +1,7 @@
 from color import Color
 from PIL import Image as PILImage
 
+
 class Image:
     def __init__(self, width: int, height: int):
         self.width = width
@@ -10,8 +11,8 @@ class Image:
     def set_pixel(self, x: int, y: int, color: Color):
         self.pixels[y * self.width + x] = color
 
-    def save_as_ppm(self, file_path:str):
-        with open(file_path, 'w') as f:
+    def save_as_ppm(self, file_path: str):
+        with open(file_path, "w") as f:
             self.write(f)
 
     def write(self, f):
@@ -32,13 +33,14 @@ class Image:
             else:
                 f.write("\t")
 
-    def save_as_png(self, file_path:str):
+    def save_as_png(self, file_path: str):
         img = PILImage.new("RGB", (self.width, self.height))
         for y in range(self.height):
             for x in range(self.width):
                 c = self.pixels[y * self.width + x]
                 img.putpixel((x, y), ((int(255 * c.x), int(255 * c.y), int(255 * c.z))))
         img.save(file_path)
+
 
 EOL = "\n"
 COLORS = 255
