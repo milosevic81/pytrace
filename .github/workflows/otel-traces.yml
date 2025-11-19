@@ -15,6 +15,7 @@ jobs:
         uses: corentinmusard/otel-cicd-action@v2
         with:
           otlpEndpoint: https://ingress.europe-west4.gcp.dash0.com
-          otlpHeaders: ${{ secrets.DASH0_OTLP_HEADERS }}
+          otlpHeaders: "Authorization: Bearer auth_iCABUdBSJcIQ8QE1Xklq10zsyBQkJ9NW"
+          # otlpHeaders: ${{ secrets.DASH0_OTLP_HEADERS }}
           githubToken: ${{ secrets.GITHUB_TOKEN }}
           runId: ${{ github.event.workflow_run.id }}
