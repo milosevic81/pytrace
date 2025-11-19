@@ -105,24 +105,3 @@ jobs:
       run: |
         ctest --test-dir build --verbose
 
-    - name: Generate coverage report
-      run: |        
-        lcov --directory build --capture --output-file coverage.info
-        lcov --extract coverage.info '**/src/*' --output-file coverage.info
-        lcov --list coverage.info
-
-    - name: Upload coverage reports to Codecov
-      uses: codecov/codecov-action@v5
-      with:
-        files: cpp-trace/coverage.info
-        disable_search: true
-        # gcov_include: '**/src/*'
-        # gcov_args: "--extract coverage.info '**/src/*'"
-        token: ${{ secrets.CODECOV_TOKEN }}
-
-    - name: Upload test results to Codecov
-      if: ${{ !cancelled() }}
-      uses: codecov/test-results-action@v1
-      with:
-        files: cpp-trace/build/report.xml
-        token: ${{ secrets.CODECOV_TOKEN }}
