@@ -17,7 +17,7 @@ jobs:
           # otlpEndpoint: https://ingress.europe-west4.gcp.dash0.com
           # DASH0_OTLP_ENDPOINT: grpc://ingress.eu-west-1.aws.dash0.com:4317
           otlpEndpoint: ingress.europe-west4.gcp.dash0.com:4317
-          otlpHeaders: Authorization: Bearer auth_iCABUdBSJcIQ8QE1Xklq10zsyBQkJ9NW
+          otlpHeaders: "Authorization: Bearer auth_iCABUdBSJcIQ8QE1Xklq10zsyBQkJ9NW"
           # DASH0_OTLP_HEADERS: Authorization: Bearer auth_XXXXXXXXXXXXXXXXXXXXXXXX
           # otlpHeaders: ${{ secrets.DASH0_OTLP_HEADERS }}
           githubToken: ${{ secrets.GITHUB_TOKEN }}
